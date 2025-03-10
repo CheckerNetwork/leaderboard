@@ -5,16 +5,16 @@
     "type": "module",
     "scripts": {
         "dev": "npx serve src",
-        "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" && prettier --check \"src/**/*.{js,html,css}\" \"test/**/*.js\"",
-        "lint:fix": "prettier --write \"src/**/*.{js,html,css}\" \"test/**/*.js\"",
+        "lint": "standard && prettier --check \"src/**/*.{html,css}\"",
+        "lint:fix": "standard --fix && prettier --write \"src/**/*.{html,css}\"",
         "test:types": "tsc --noEmit",
         "test:unit": "node --test",
         "test": "npm run test:types && npm run test:unit"
     },
     "devDependencies": {
         "@types/node": "^22.13.10",
-        "eslint": "^8.42.0",
         "prettier": "^2.8.8",
+        "standard": "^17.1.2",
         "typescript": "^5.3.0"
     }
 }

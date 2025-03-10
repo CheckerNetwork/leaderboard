@@ -13,7 +13,7 @@ jobs:
         dependencyStartsWith:
           - "@types/"
           - typescript
-          - eslint
+          - standard
           - prettier
     steps:
       - name: Dependabot metadata
