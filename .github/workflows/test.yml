@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Test
 
 on:
   push:
@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,15 +21,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - run: npm ci
       - run: npm run test
-
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: network-leaderboard
-          directory: src
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }} 
