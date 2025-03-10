@@ -9,7 +9,7 @@ test('NETWORKS array contains expected networks', () => {
 test('createNetworkItemHTML generates correct HTML', () => {
   const testNetwork = {
     name: 'test-network',
-    successRate: 0.956
+    successRate: 95.60
   }
 
   const html = createNetworkItemHTML(testNetwork)
@@ -34,7 +34,7 @@ test('createNetworkItemHTML handles zero success rate', () => {
 test('createNetworkItemHTML handles 100% success rate', () => {
   const testNetwork = {
     name: 'test-network',
-    successRate: 1
+    successRate: 100
   }
 
   const html = createNetworkItemHTML(testNetwork)
