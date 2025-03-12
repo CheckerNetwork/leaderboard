@@ -30,7 +30,7 @@ export const API_BASE_URL = 'https://api.checker.network'
  * @param {string} successful - Number of successful measurements
  * @returns {number} Success rate as percentage (0-100)
  */
-function calculateSuccessRate(total, successful) {
+function calculateSuccessRate (total, successful) {
   const totalNum = parseInt(total, 10)
   const successfulNum = parseInt(successful, 10)
 
@@ -43,7 +43,7 @@ function calculateSuccessRate(total, successful) {
  * @param {string} networkName - The name of the network to fetch data for
  * @returns {Promise<NetworkData | null>} The processed network data or null if the request fails
  */
-export async function fetchNetworkData(networkName) {
+export async function fetchNetworkData (networkName) {
   try {
     // const response = await fetch(`${API_BASE_URL}/${networkName}/measurements`)
     // if (!response.ok) {
@@ -55,9 +55,9 @@ export async function fetchNetworkData(networkName) {
     // TODO: Uncomment the above code and remove the below code when the API is available
     const data = [
       {
-        "day": "2021-10-03",
-        "total": `${Math.floor(Math.random() * 100) + 50}`,
-        "successful": `${Math.floor(Math.random() * 50)}`
+        day: '2021-10-03',
+        total: `${Math.floor(Math.random() * 100) + 50}`,
+        successful: `${Math.floor(Math.random() * 50)}`
       }
     ]
     return {
@@ -75,7 +75,7 @@ export async function fetchNetworkData(networkName) {
  * @param {NetworkData} network - The network data to create an element for
  * @returns {string} HTML string for the network item
  */
-export function createNetworkItemHTML(network) {
+export function createNetworkItemHTML (network) {
   return `
     <div class="network-item">
       <span class="network-name">${network.name}</span>
@@ -88,7 +88,7 @@ export function createNetworkItemHTML(network) {
  * Updates the DOM elements with the leaderboard data
  * @returns {Promise<void>}
  */
-export async function updateLeaderboard() {
+export async function updateLeaderboard () {
   /** @type {HTMLElement | null} */
   const loadingElement = document.getElementById('loading')
   /** @type {HTMLElement | null} */
