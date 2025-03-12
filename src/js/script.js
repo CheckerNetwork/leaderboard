@@ -1,4 +1,5 @@
 // @ts-check
+import { htmlEscape } from 'https://cdn.jsdelivr.net/npm/escape-goat@4.0.0/+esm';
 
 /**
  * @typedef {Object} NetworkData
@@ -76,7 +77,7 @@ export async function fetchNetworkData (networkName) {
  * @returns {string} HTML string for the network item
  */
 export function createNetworkItemHTML (network) {
-  return `
+  return htmlEscape`
     <div class="network-item">
       <span class="network-name">${network.name}</span>
       <span class="success-rate">${network.successRate.toFixed(2)}%</span>
