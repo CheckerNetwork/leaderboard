@@ -1,5 +1,5 @@
 // @ts-check
-import { htmlEscape } from 'https://cdn.jsdelivr.net/npm/escape-goat@4.0.0/+esm';
+import { htmlEscape } from 'escape-goat'
 
 /**
  * @typedef {Object} NetworkData
