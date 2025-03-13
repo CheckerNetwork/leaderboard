@@ -30,7 +30,7 @@ export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
  * @param {string} networkName
  * @returns {string}
  */
-function getNetworkUrl (networkName) {
+export function getNetworkUrl (networkName) {
   if (networkName === 'filecoin') {
     return SPARK_API_BASE_URL
   }
