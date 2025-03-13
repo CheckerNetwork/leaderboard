@@ -61,7 +61,15 @@ function calculateSuccessRate (total, successful) {
 export async function fetchNetworkData (networkName) {
   try {
     const networkUrl = getNetworkUrl(networkName)
-    const response = await fetch(`${networkUrl}/retrieval-success-rate`)
+    const response = await fetch(`${networkUrl}/retrieval-success-rate`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Access-Control-Allow-Origin': 'https://leaderboard.checker.network'
+        }
+      }
+    )
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

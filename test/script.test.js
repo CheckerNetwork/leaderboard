@@ -42,7 +42,6 @@ test('createNetworkItemHTML handles 100% success rate', () => {
   assert.ok(html.includes('100.00%'))
 })
 
-
 test('getNetworkUrl returns correct URL for filecoin', () => {
   const url = getNetworkUrl('filecoin')
   assert.equal(url, 'https://stats.filspark.com')
