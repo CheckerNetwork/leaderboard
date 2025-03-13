@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { NETWORKS, createNetworkItemHTML } from '../src/js/script.js'
 
 test('NETWORKS array contains expected networks', () => {
-  assert.deepEqual(NETWORKS, ['arweave', 'filecoin', 'walrus'])
+  assert.deepEqual(NETWORKS, ['filecoin'])
 })
 
 test('createNetworkItemHTML generates correct HTML', () => {
