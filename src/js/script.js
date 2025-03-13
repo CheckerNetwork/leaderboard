@@ -64,9 +64,8 @@ export async function fetchNetworkData (networkName) {
     const response = await fetch(`${networkUrl}/retrieval-success-rate`,
       {
         headers: {
-          'Content-Type': 'application/json',
           Accept: 'application/json',
-          'Access-Control-Allow-Origin': 'https://leaderboard.checker.network'
+          'Access-Control-Allow-Origin': '*'
         }
       }
     )
