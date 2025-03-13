@@ -2,75 +2,138 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  width: 100%;
+  max-width: 600px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
   color: #333;
 }
 
-.leaderboard {
-  background: white;
+.network-list {
+  list-style-type: none;
+  background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .network-item {
+  padding: 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   border-bottom: 1px solid #eee;
-}
-
-.network-item.header {
-  background-color: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
-  margin-bottom: 0.5rem;
-}
-
-.column-header {
-  font-weight: 700 !important;
-  color: #495057 !important;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
+  transition: background-color 0.2s;
 }
 
 .network-item:last-child {
   border-bottom: none;
 }
 
+.network-item:hover {
+  background-color: #f9f9f9;
+}
+
+.network-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  background-color: #eee;
+}
+
+.network-info {
+  flex: 1;
+}
+
 .network-name {
-  font-weight: 600;
-  color: #2c3e50;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
 }
 
 .success-rate {
-  color: #27ae60;
-  font-weight: 500;
+  font-weight: bold;
+  color: #2563eb;
+  font-size: 18px;
 }
 
-.loading,
-.error {
+/* Loading state styles */
+.loading-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 40px;
   text-align: center;
-  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.error {
-  color: #e74c3c;
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #2563eb;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Error state styles */
+.error-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-icon {
+  color: #e53e3e;
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.error-title {
+  color: #e53e3e;
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Use these classes to show/hide different states */
+.hidden {
+  display: none;
 }
