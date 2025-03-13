@@ -19,7 +19,7 @@
  */
 
 /** @type {readonly string[]} */
-// TODO: Add 'arweave' and 'walrus' to the NETWORKS array
+// TODO: Add 'arweave' and 'walrus' to the NETWORKS array once we start collecting data for them
 export const NETWORKS = ['filecoin']
 
 /** @type {string} */
