@@ -16,6 +16,7 @@ test('createNetworkItemHTML generates correct HTML', () => {
 
   assert.ok(html.includes('test-network'))
   assert.ok(html.includes('95.60%'))
+  assert.ok(html.includes('network-logo'))
   assert.ok(html.includes('network-item'))
   assert.ok(html.includes('network-name'))
   assert.ok(html.includes('success-rate'))

@@ -9,15 +9,24 @@
   <body>
     <div class="container">
       <h1>Network Leaderboard</h1>
-      <div class="leaderboard">
-        <div class="loading" id="loading">Loading...</div>
-        <div class="error" id="error" style="display: none">Error loading data</div>
-        <div class="network-item header">
-          <span class="network-name column-header">Network Name</span>
-          <span class="success-rate column-header">Retrievability Score</span>
-        </div>
-        <div class="networks" id="networks"></div>
+
+      <!-- Loading State -->
+      <div id="loading-container" class="loading-container hidden">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading network data...</p>
       </div>
+
+      <!-- Error State -->
+      <div id="error-container" class="error-container hidden">
+        <div class="error-icon">⚠️</div>
+        <h2 class="error-title">Error Loading Data</h2>
+        <p class="error-message">
+          Unable to fetch network information. Please check your connection.
+        </p>
+      </div>
+
+      <!-- Data State -->
+      <ul id="network-list" class="network-list hidden"></ul>
     </div>
     <script type="module" src="js/script.js"></script>
   </body>

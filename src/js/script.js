@@ -77,10 +77,13 @@ export async function fetchNetworkData (networkName) {
  */
 export function createNetworkItemHTML (network) {
   return `
-    <div class="network-item">
-      <span class="network-name">${network.name}</span>
-      <span class="success-rate">${network.successRate.toFixed(2)}%</span>
-    </div>
+    <li class="network-item">
+        <img class="network-logo" src="media/${network.name}.svg" alt="Solana logo">
+        <div class="network-info">
+            <div class="network-name">${network.name}</div>
+        </div>
+        <div class="success-rate">${network.successRate.toFixed(2)}%</div>
+    </li>
   `
 }
 
@@ -90,17 +93,18 @@ export function createNetworkItemHTML (network) {
  */
 export async function updateLeaderboard () {
   /** @type {HTMLElement | null} */
-  const loadingElement = document.getElementById('loading')
+  const loadingContainer = document.getElementById('loading-container')
   /** @type {HTMLElement | null} */
-  const errorElement = document.getElementById('error')
+  const errorElement = document.getElementById('error-container')
   /** @type {HTMLElement | null} */
-  const networksElement = document.getElementById('networks')
+  const networksElement = document.getElementById('network-list')
 
-  if (!loadingElement || !errorElement || !networksElement) {
+  if (!loadingContainer || !errorElement || !networksElement) {
     console.error('Required DOM elements not found')
     return
   }
 
+  loadingContainer.classList.remove('hidden')
   try {
     const networkPromises = NETWORKS.map(fetchNetworkData)
     const networksData = await Promise.all(networkPromises)
@@ -119,13 +123,13 @@ export async function updateLeaderboard () {
 
     networksElement.innerHTML = validData.map(createNetworkItemHTML).join('')
 
-    loadingElement.style.display = 'none'
-    errorElement.style.display = 'none'
-    networksElement.style.display = 'block'
+    loadingContainer.classList.add('hidden')
+    errorElement.classList.add('hidden')
+    networksElement.classList.remove('hidden')
   } catch (error) {
-    loadingElement.style.display = 'none'
-    errorElement.style.display = 'block'
-    networksElement.style.display = 'none'
+    loadingContainer.classList.add('hidden')
+    errorElement.classList.remove('hidden')
+    networksElement.classList.add('hidden')
     console.error('Error updating leaderboard:', error)
   }
 }
