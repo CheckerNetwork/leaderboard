@@ -1,4 +1,5 @@
 // @ts-check
+import { htmlEscape } from 'escape-goat'
 
 /**
  * @typedef {Object} NetworkData
@@ -83,7 +84,7 @@ export async function fetchNetworkData (networkName) {
  * @returns {string} HTML string for the network item
  */
 export function createNetworkItemHTML (network) {
-  return `
+  return htmlEscape`
     <li class="network-item">
         <img class="network-logo" src="media/${network.name}.svg" alt="Solana logo">
         <div class="network-info">
