@@ -19,11 +19,24 @@
  */
 
 /** @type {readonly string[]} */
-export const NETWORKS = ['arweave', 'filecoin', 'walrus']
+// TODO: Add 'arweave' and 'walrus' to the NETWORKS array
+export const NETWORKS = ['filecoin']
 
 /** @type {string} */
 export const API_BASE_URL = 'https://api.checker.network'
 export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
+
+/**
+ * @param {string} networkName
+ * @returns {string}
+ */
+function getNetworkUrl (networkName) {
+  if (networkName === 'filecoin') {
+    return SPARK_API_BASE_URL
+  }
+
+  return `${API_BASE_URL}/${networkName}`
+}
 
 /**
  * Calculates success rate from total and successful measurements
@@ -46,8 +59,8 @@ function calculateSuccessRate (total, successful) {
  */
 export async function fetchNetworkData (networkName) {
   try {
-    const baseUrl = networkName === 'filecoin' ? API_BASE_URL : API_BASE_URL
-    const response = await fetch(`${API_BASE_URL}/${networkName}/retrieval-success-rate`)
+    const networkUrl = getNetworkUrl(networkName)
+    const response = await fetch(`${networkUrl}/retrieval-success-rate`)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -131,5 +144,4 @@ export async function updateLeaderboard () {
 // Only run in browser environment
 if (typeof window !== 'undefined') {
   updateLeaderboard()
-  setInterval(updateLeaderboard, 30000)
 }
