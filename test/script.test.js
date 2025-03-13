@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { NETWORKS, createNetworkItemHTML } from '../src/js/script.js'
+import { NETWORKS, createNetworkItemHTML, getNetworkUrl } from '../src/js/script.js'
 
 test('NETWORKS array contains expected networks', () => {
   assert.deepEqual(NETWORKS, ['filecoin'])
@@ -40,4 +40,15 @@ test('createNetworkItemHTML handles 100% success rate', () => {
 
   const html = createNetworkItemHTML(testNetwork)
   assert.ok(html.includes('100.00%'))
+})
+
+
+test('getNetworkUrl returns correct URL for filecoin', () => {
+  const url = getNetworkUrl('filecoin')
+  assert.equal(url, 'https://stats.filspark.com')
+})
+
+test('getNetworkUrl returns correct URL for other networks', () => {
+  const url = getNetworkUrl('test-network')
+  assert.equal(url, 'https://api.checker.network/test-network')
 })
