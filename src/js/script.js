@@ -56,9 +56,10 @@ function calculateSuccessRate (total, successful) {
 /**
  * Fetches network data from the API for a specific network
  * @param {string} networkName - The name of the network to fetch data for
+ * @param {typeof globalThis.fetch} [fetch=globalThis.fetch] - The fetch function to use
  * @returns {Promise<NetworkData | null>} The processed network data or null if the request fails
  */
-export async function fetchNetworkData (networkName) {
+export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
   try {
     const networkUrl = getNetworkUrl(networkName)
     const response = await fetch(`${networkUrl}/retrieval-success-rate`)
@@ -114,7 +115,7 @@ export async function updateLeaderboard () {
 
   loadingContainer.classList.remove('hidden')
   try {
-    const networkPromises = NETWORKS.map(fetchNetworkData)
+    const networkPromises = NETWORKS.map((network) => fetchNetworkData(network))
     const networksData = await Promise.all(networkPromises)
 
     /** @type {NetworkData[]} */
