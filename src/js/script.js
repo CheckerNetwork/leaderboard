@@ -23,6 +23,7 @@ export const NETWORKS = ['arweave', 'filecoin', 'walrus']
 
 /** @type {string} */
 export const API_BASE_URL = 'https://api.checker.network'
+export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
 
 /**
  * Calculates success rate from total and successful measurements
@@ -45,21 +46,14 @@ function calculateSuccessRate (total, successful) {
  */
 export async function fetchNetworkData (networkName) {
   try {
-    // const response = await fetch(`${API_BASE_URL}/${networkName}/measurements`)
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`)
-    // }
+    const baseUrl = networkName === 'filecoin' ? API_BASE_URL : API_BASE_URL
+    const response = await fetch(`${API_BASE_URL}/${networkName}/retrieval-success-rate`)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
 
-    // /** @type {NetworkDailyMeasurments[]} */
-    // const data = await response.json()
-    // TODO: Uncomment the above code and remove the below code when the API is available
-    const data = [
-      {
-        day: '2021-10-03',
-        total: `${Math.floor(Math.random() * 100) + 50}`,
-        successful: `${Math.floor(Math.random() * 50)}`
-      }
-    ]
+    /** @type {NetworkDailyMeasurments[]} */
+    const data = await response.json()
     return {
       name: networkName,
       successRate: data.length > 0 ? calculateSuccessRate(data[0].total, data[0].successful) : 0
