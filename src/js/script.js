@@ -87,7 +87,7 @@ export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
 export function createNetworkItemHTML (network) {
   return htmlEscape`
     <li class="network-item">
-        <img class="network-logo" src="media/${network.name}.svg" alt="Solana logo">
+        <img class="network-logo" src="media/${network.name}.svg" alt="${network.name} logo">
         <div class="network-info">
             <div class="network-name">${network.name}</div>
         </div>
