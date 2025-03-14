@@ -65,12 +65,17 @@ h1 {
   font-weight: bold;
   color: #333;
   margin-bottom: 4px;
+  text-transform: capitalize;
 }
 
 .success-rate {
   font-weight: bold;
   color: #2563eb;
   font-size: 18px;
+}
+
+.success-rate.disabled {
+  color: #666;
 }
 
 /* Loading state styles */
