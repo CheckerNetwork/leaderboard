@@ -20,10 +20,24 @@ import { htmlEscape } from 'escape-goat'
  */
 
 /** @type {readonly string[]} */
-export const NETWORKS = ['arweave', 'filecoin', 'walrus']
+// TODO: Add 'arweave' and 'walrus' to the NETWORKS array once we start collecting data for them
+export const NETWORKS = ['filecoin']
 
 /** @type {string} */
 export const API_BASE_URL = 'https://api.checker.network'
+export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
+
+/**
+ * @param {string} networkName
+ * @returns {string}
+ */
+export function getNetworkUrl (networkName) {
+  if (networkName === 'filecoin') {
+    return SPARK_API_BASE_URL
+  }
+
+  return `${API_BASE_URL}/${networkName}`
+}
 
 /**
  * Calculates success rate from total and successful measurements
@@ -42,25 +56,19 @@ function calculateSuccessRate (total, successful) {
 /**
  * Fetches network data from the API for a specific network
  * @param {string} networkName - The name of the network to fetch data for
+ * @param {typeof globalThis.fetch} [fetch=globalThis.fetch] - The fetch function to use
  * @returns {Promise<NetworkData | null>} The processed network data or null if the request fails
  */
-export async function fetchNetworkData (networkName) {
+export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
   try {
-    // const response = await fetch(`${API_BASE_URL}/${networkName}/measurements`)
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`)
-    // }
+    const networkUrl = getNetworkUrl(networkName)
+    const response = await fetch(`${networkUrl}/retrieval-success-rate`)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
 
-    // /** @type {NetworkDailyMeasurments[]} */
-    // const data = await response.json()
-    // TODO: Uncomment the above code and remove the below code when the API is available
-    const data = [
-      {
-        day: '2021-10-03',
-        total: `${Math.floor(Math.random() * 100) + 50}`,
-        successful: `${Math.floor(Math.random() * 50)}`
-      }
-    ]
+    /** @type {NetworkDailyMeasurments[]} */
+    const data = await response.json()
     return {
       name: networkName,
       successRate: data.length > 0 ? calculateSuccessRate(data[0].total, data[0].successful) : 0
@@ -79,7 +87,7 @@ export async function fetchNetworkData (networkName) {
 export function createNetworkItemHTML (network) {
   return htmlEscape`
     <li class="network-item">
-        <img class="network-logo" src="media/${network.name}.svg" alt="Solana logo">
+        <img class="network-logo" src="media/${network.name}.svg" alt="${network.name} logo">
         <div class="network-info">
             <div class="network-name">${network.name}</div>
         </div>
@@ -107,7 +115,7 @@ export async function updateLeaderboard () {
 
   loadingContainer.classList.remove('hidden')
   try {
-    const networkPromises = NETWORKS.map(fetchNetworkData)
+    const networkPromises = NETWORKS.map((network) => fetchNetworkData(network))
     const networksData = await Promise.all(networkPromises)
 
     /** @type {NetworkData[]} */
@@ -122,7 +130,8 @@ export async function updateLeaderboard () {
     // Sort by success rate descending
     validData.sort((a, b) => b.successRate - a.successRate)
 
-    networksElement.innerHTML = validData.map(createNetworkItemHTML).join('')
+    // Prepend new data to the existing list
+    networksElement.innerHTML = validData.map(createNetworkItemHTML).join('') + networksElement.innerHTML
 
     loadingContainer.classList.add('hidden')
     errorElement.classList.add('hidden')
@@ -138,5 +147,4 @@ export async function updateLeaderboard () {
 // Only run in browser environment
 if (typeof window !== 'undefined') {
   updateLeaderboard()
-  setInterval(updateLeaderboard, 30000)
 }
