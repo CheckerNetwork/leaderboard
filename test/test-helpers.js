@@ -22,7 +22,7 @@ export function createMockedFetch ({ responseBody, status, throwError, errorMess
     }
 
     return new Response(JSON.stringify(responseBody), {
-      status,
+      status: status ?? 200,
       headers: { 'Content-Type': 'application/json' }
     })
   }

@@ -54,7 +54,7 @@ test('getNetworkUrl returns correct URL for other networks', () => {
 })
 
 test('fetchNetworkData returns correct data for filecoin', async () => {
-  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [{ total: '100', successful: '95' }], status: 200 })
+  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [{ total: '100', successful: '95' }] })
 
   const data = await fetchNetworkData('filecoin', mockFetch)
   assert.deepEqual(requestedUrls, ['https://stats.filspark.com/retrieval-success-rate'])
@@ -62,7 +62,7 @@ test('fetchNetworkData returns correct data for filecoin', async () => {
 })
 
 test('fetchNetworkData returns correct data for test-network', async () => {
-  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [{ total: '100', successful: '95' }], status: 200 })
+  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [{ total: '100', successful: '95' }] })
 
   const data = await fetchNetworkData('test-network', mockFetch)
   assert.deepEqual(requestedUrls, ['https://api.checker.network/test-network/retrieval-success-rate'])
@@ -70,7 +70,7 @@ test('fetchNetworkData returns correct data for test-network', async () => {
 })
 
 test('fetchNetworkData returns 0 RSR data for test-network', async () => {
-  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [], status: 200 })
+  const { requestedUrls, mockFetch } = createMockedFetch({ responseBody: [] })
 
   const data = await fetchNetworkData('test-network', mockFetch)
   assert.deepEqual(requestedUrls, ['https://api.checker.network/test-network/retrieval-success-rate'])
