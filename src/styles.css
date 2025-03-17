@@ -41,6 +41,19 @@ h1 {
   transition: background-color 0.2s;
 }
 
+.network-item.header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.header-cell {
+  color: #333 !important;
+}
+
+.network-item.header:hover {
+  background-color: #f8f9fa;
+}
+
 .network-item:last-child {
   border-bottom: none;
 }

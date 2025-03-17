@@ -130,8 +130,8 @@ export async function updateLeaderboard () {
     // Sort by success rate descending
     validData.sort((a, b) => b.successRate - a.successRate)
 
-    // Prepend new data to the existing list
-    networksElement.innerHTML = validData.map(createNetworkItemHTML).join('') + networksElement.innerHTML
+    // Append new data to the list after the first child (the header)
+    networksElement.firstElementChild?.insertAdjacentHTML('afterend', validData.map(createNetworkItemHTML).join(''))
 
     loadingContainer.classList.add('hidden')
     errorElement.classList.add('hidden')
