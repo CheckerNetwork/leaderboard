@@ -5,6 +5,7 @@ import { htmlEscape } from 'escape-goat'
  * @typedef {Object} NetworkData
  * @property {string} name - The name of the network
  * @property {number} successRate - The success rate of the network (between 0 and 100)
+ * @property {string} symbol - The symbol of the network
  */
 
 /**
@@ -71,6 +72,7 @@ export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
     const data = await response.json()
     return {
       name: networkName,
+      symbol: 'FIL',
       successRate: data.length > 0 ? calculateSuccessRate(data[0].total, data[0].successful) : 0
     }
   } catch (error) {
@@ -82,17 +84,42 @@ export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
 /**
  * Creates an HTML element for a network item
  * @param {NetworkData} network - The network data to create an element for
+ * @param {number} index - The index of the network in the leaderboard
  * @returns {string} HTML string for the network item
  */
-export function createNetworkItemHTML (network) {
+export function createNetworkItemHTML (network, index) {
+  const color = '#4ff8ca'
+
   return htmlEscape`
-    <li class="network-item">
-        <img class="network-logo" src="media/${network.name}.svg" alt="${network.name} logo">
-        <div class="network-info">
-            <div class="network-name">${network.name}</div>
-        </div>
-        <div class="success-rate">${network.successRate.toFixed(2)}%</div>
-    </li>
+  <div class="table-row">
+    <div class="ranking-col">${index}.</div>
+    <div class="network-col">
+      <div class="network-logo">
+        <img src="media/${network.name}.svg" alt="${network.name} Logo">
+      </div>
+      <div class="network-info">
+        <div class="network-name">${network.name}</div>
+        <div class="network-symbol">${network.symbol}</div>
+      </div>
+    </div>
+    <div class="score-col">
+      <div>
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <!-- Outer circle acting as a border -->
+        <circle cx="40" cy="40" r="37.5" stroke="#363636" stroke-width="1" fill="none" />
+      
+        <!-- Progress circle -->
+        <circle cx="40" cy="40" r="32" stroke="${color}" stroke-width="5" fill="none" stroke-dasharray="201.06" stroke-dashoffset="50.27" stroke-linecap="round" />
+        
+          <!-- Text element -->
+          <text x="40" y="40" text-anchor="middle" font-family="'Clash Display', Arial, sans-serif">
+            <tspan x="40" dy="0" fill="${color}" font-size="22" font-weight="normal">${network.successRate.toFixed(1)}</tspan>
+            <tspan x="40" dy="2em" font-size="7" font-weight="light" fill="gray">/100</tspan>
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
   `
 }
 
@@ -101,19 +128,22 @@ export function createNetworkItemHTML (network) {
  * @returns {Promise<void>}
  */
 export async function updateLeaderboard () {
+  // /** @type {HTMLElement | null} */
+  // const loadingContainer = document.getElementById('loading-container')
+  // /** @type {HTMLElement | null} */
+  // const errorElement = document.getElementById('error-container')
   /** @type {HTMLElement | null} */
-  const loadingContainer = document.getElementById('loading-container')
-  /** @type {HTMLElement | null} */
-  const errorElement = document.getElementById('error-container')
-  /** @type {HTMLElement | null} */
-  const networksElement = document.getElementById('network-list')
+  const networksElement = document.getElementById('table-rows')
 
-  if (!loadingContainer || !errorElement || !networksElement) {
+  // if (!loadingContainer || !errorElement || !networksElement) {
+  //   console.error('Required DOM elements not found')
+  //   return
+  // }
+  if (!networksElement) {
     console.error('Required DOM elements not found')
     return
   }
 
-  loadingContainer.classList.remove('hidden')
   try {
     const networkPromises = NETWORKS.map((network) => fetchNetworkData(network))
     const networksData = await Promise.all(networkPromises)
@@ -131,14 +161,14 @@ export async function updateLeaderboard () {
     validData.sort((a, b) => b.successRate - a.successRate)
 
     // Prepend new data to the existing list
-    networksElement.innerHTML = validData.map(createNetworkItemHTML).join('') + networksElement.innerHTML
+    networksElement.innerHTML = validData.map((network, index) => createNetworkItemHTML(network, index + 1)).join('') + networksElement.innerHTML
 
-    loadingContainer.classList.add('hidden')
-    errorElement.classList.add('hidden')
-    networksElement.classList.remove('hidden')
+    // loadingContainer.classList.add('hidden')
+    // errorElement.classList.add('hidden')
+    // networksElement.classList.remove('hidden')
   } catch (error) {
-    loadingContainer.classList.add('hidden')
-    errorElement.classList.remove('hidden')
+    // loadingContainer.classList.add('hidden')
+    // errorElement.classList.remove('hidden')
     networksElement.classList.add('hidden')
     console.error('Error updating leaderboard:', error)
   }
