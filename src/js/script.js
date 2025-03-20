@@ -2,6 +2,12 @@
 import { htmlEscape } from 'escape-goat'
 
 /**
+ * @typedef {Object} Network
+ * @property {string} name - The name of the network
+ * @property {string} symbol - The symbol of the network
+ */
+
+/**
  * @typedef {Object} NetworkData
  * @property {string} name - The name of the network
  * @property {number} successRate - The success rate of the network (between 0 and 100)
@@ -20,19 +26,21 @@ import { htmlEscape } from 'escape-goat'
  * @property {NetworkDailyMeasurments[]} measurements - Array of daily measurements
  */
 
-/** @type {readonly string[]} */
+/** @type {readonly Network[]} */
 // TODO: Add 'arweave' and 'walrus' to the NETWORKS array once we start collecting data for them
-export const NETWORKS = ['filecoin']
+export const NETWORKS = [
+  { name: 'filecoin', symbol: 'FIL' }
+]
 
 /** @type {string} */
 export const API_BASE_URL = 'https://api.checker.network'
 export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
 
 /**
- * @param {string} networkName
+ * @param {Network} network
  * @returns {string}
  */
-export function getNetworkUrl (networkName) {
+export function getNetworkUrl ({ name: networkName }) {
   if (networkName === 'filecoin') {
     return SPARK_API_BASE_URL
   }
@@ -56,13 +64,13 @@ function calculateSuccessRate (total, successful) {
 
 /**
  * Fetches network data from the API for a specific network
- * @param {string} networkName - The name of the network to fetch data for
+ * @param {Network} network - The name of the network to fetch data for
  * @param {typeof globalThis.fetch} [fetch=globalThis.fetch] - The fetch function to use
  * @returns {Promise<NetworkData | null>} The processed network data or null if the request fails
  */
-export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
+export async function fetchNetworkData (network, fetch = globalThis.fetch) {
   try {
-    const networkUrl = getNetworkUrl(networkName)
+    const networkUrl = getNetworkUrl(network)
     const response = await fetch(`${networkUrl}/retrieval-success-rate`)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
@@ -71,12 +79,11 @@ export async function fetchNetworkData (networkName, fetch = globalThis.fetch) {
     /** @type {NetworkDailyMeasurments[]} */
     const data = await response.json()
     return {
-      name: networkName,
-      symbol: 'FIL',
+      ...network,
       successRate: data.length > 0 ? calculateSuccessRate(data[0].total, data[0].successful) : 0
     }
   } catch (error) {
-    console.error(`Error fetching ${networkName} data:`, error)
+    console.error(`Error fetching ${network} data:`, error)
     return null
   }
 }
