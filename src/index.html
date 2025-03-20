@@ -1,99 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CHECKER Leaderboard</title>
-  <link rel="stylesheet" href="styles.css">
-  <script type="importmap">
-    {
-      "imports": {
-        "escape-goat": "https://cdn.jsdelivr.net/npm/escape-goat@4.0.0/+esm"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHECKER Leaderboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "escape-goat": "https://cdn.jsdelivr.net/npm/escape-goat@4.0.0/+esm"
+        }
       }
-    }
-  </script>
-  <script defer data-domain="leaderboard.checker.network" src="https://plausible.io/js/script.js"></script>
-</head>
-<body>
-  <main class="main-container">
-    <!-- Gradient overlays -->
-    <div class="gradient-overlay top-right"></div>
-    <div class="gradient-overlay bottom-right"></div>
-
-    <div class="container">
-      <!-- Header with logo and zigzag pattern -->
-      <header class="header">
-        <div class="logo-container">
-          <div class="logo">
-            <img src="media/leaderboard-logo.svg" alt="Checker Leaderboard Logo">
-          </div>
-        </div>
-        <div class="zigzag-container">
-          <img src="media/zigzag-pattern.svg" alt="Zigzag Pattern" class="zigzag">
-        </div>
-      </header>
-
-      <!-- Main leaderboard -->
-      <div class="leaderboard">
-        <!-- Table header -->
-        <div class="table-header">
-          <div class="ranking-col">Ranking</div>
-          <div class="network-col">Network</div>
-          <div class="score-col">Score</div>
-        </div>
-
-        <!-- Table rows -->
-        <div id="table-rows" class="table-rows">
-
-          <div class="table-row">
-            <div class="ranking-col">2.</div>
-            <div class="network-col">
-              <div class="network-logo">
-                <img src="media/walrus.svg" alt="Walrus Logo">
-              </div>
-              <div class="network-info">
-                <div class="network-name">Walrus</div>
-                <div class="network-symbol">WAL</div>
-              </div>
+    </script>
+    <script
+      defer
+      data-domain="leaderboard.checker.network"
+      src="https://plausible.io/js/script.js"
+    ></script>
+  </head>
+  <body>
+    <main class="main-container">
+      <div class="container">
+        <!-- Header with logo and zigzag pattern -->
+        <header class="header">
+          <div class="logo-container">
+            <div class="logo">
+              <img src="media/leaderboard-logo.svg" alt="Checker Leaderboard Logo" />
             </div>
-            <div class="score-col">
-              <div class="circular-progress" data-value="94" data-color="#4ff8ca">
-                <div class="progress-value">
-                  <span class="value">N/A</span>
+          </div>
+          <div class="zigzag-container">
+            <img src="media/zigzag-pattern.svg" alt="Zigzag Pattern" class="zigzag" />
+          </div>
+        </header>
+
+        <!-- Main leaderboard -->
+        <div class="leaderboard">
+          <!-- Table header -->
+          <div class="table-header">
+            <div class="ranking-col">Ranking</div>
+            <div class="network-col">Network</div>
+            <div class="score-col">Score</div>
+          </div>
+
+          <!-- Table rows -->
+          <div id="table-rows" class="table-rows">
+            <div class="table-row">
+              <div class="ranking-col">2.</div>
+              <div class="network-col">
+                <div class="network-logo">
+                  <img src="media/walrus.svg" alt="Walrus Logo" />
+                </div>
+                <div class="network-info">
+                  <div class="network-name">Walrus</div>
+                  <div class="network-symbol">WAL</div>
+                </div>
+              </div>
+              <div class="score-col">
+                <div class="circular-progress" data-value="94" data-color="#4ff8ca">
+                  <div class="progress-value">
+                    <span class="value">N/A</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="table-row">
-            <div class="ranking-col">3.</div>
-            <div class="network-col">
-              <div class="network-logo">
-                <img src="media/arweave.svg" alt="Arweave Logo">
+            <div class="table-row">
+              <div class="ranking-col">3.</div>
+              <div class="network-col">
+                <div class="network-logo">
+                  <img src="media/arweave.svg" alt="Arweave Logo" />
+                </div>
+                <div class="network-info">
+                  <div class="network-name">Arweave</div>
+                  <div class="network-symbol">ARW</div>
+                </div>
               </div>
-              <div class="network-info">
-                <div class="network-name">Arweave</div>
-                <div class="network-symbol">ARW</div>
-              </div>
-            </div>
-            <div class="score-col">
-              <div class="circular-progress" data-value="94" data-color="#4ff8ca">
-                <div class="progress-value">
-                  <span class="value">NA</span>
+              <div class="score-col">
+                <div class="circular-progress" data-value="94" data-color="#4ff8ca">
+                  <div class="progress-value">
+                    <span class="value">NA</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Bottom zigzag pattern -->
-    <div class="bottom-zigzag">
-      <img src="media/zigzag-pattern-bottom.svg" alt="Zigzag Pattern" class="zigzag">
-    </div>
-  </main>
+      <!-- Bottom zigzag pattern -->
+      <div class="bottom-zigzag">
+        <img src="media/zigzag-pattern-bottom.svg" alt="Zigzag Pattern" class="zigzag" />
+      </div>
+    </main>
 
-  <script type="module" src="js/script.js"></script>
-</body>
+    <script type="module" src="js/script.js"></script>
+  </body>
 </html>
