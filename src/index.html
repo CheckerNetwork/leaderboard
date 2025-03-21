@@ -1,107 +1,119 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CHECKER Leaderboard</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script type="importmap">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checker Leaderboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
       {
         "imports": {
           "escape-goat": "https://cdn.jsdelivr.net/npm/escape-goat@4.0.0/+esm"
         }
       }
     </script>
-    <script
-      defer
-      data-domain="leaderboard.checker.network"
-      src="https://plausible.io/js/script.js"
-    ></script>
-  </head>
+  <script defer data-domain="leaderboard.checker.network" src="https://plausible.io/js/script.js"></script>
+</head>
 
-  <body>
-    <main class="main-container">
-      <div class="container">
-        <!-- Header with logo and zigzag pattern -->
-        <header class="header">
-          <div class="logo-container">
-            <div class="logo">
-              <img src="media/leaderboard-logo.svg" alt="Checker Leaderboard Logo" />
+<body>
+  <main class="main-container">
+    <div class="container">
+      <!-- Header with logo and zigzag pattern -->
+      <header class="header">
+        <div class="logo-container">
+          <div class="logo">
+            <img src="media/leaderboard-logo.svg" alt="Checker Leaderboard Logo" />
+          </div>
+        </div>
+        <div class="zigzag-container">
+          <img src="media/zigzag-pattern.svg" alt="Zigzag Pattern" class="zigzag" />
+        </div>
+      </header>
+
+      <!-- Main leaderboard -->
+      <div class="leaderboard">
+        <!-- Table header -->
+        <div class="table-header">
+          <div class="ranking-col">Ranking</div>
+          <div class="network-col">Network</div>
+          <div class="score-col">Score</div>
+        </div>
+
+
+      <!-- Loading State -->
+      <div id="loading-container" class="loading-container hidden">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading network data...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-container" class="error-container hidden">
+        <div class="error-icon">⚠️</div>
+        <h2 class="error-title">Error Loading Data</h2>
+        <p class="error-message">
+          Unable to fetch network information. Please check your connection.
+        </p>
+      </div>
+
+        <!-- Table rows -->
+        <div id="table-rows" class="table-rows">
+          <div class="table-row">
+            <div class="ranking-col">2.</div>
+            <div class="network-col">
+              <div class="network-logo">
+                <img src="media/walrus.svg" alt="Walrus Logo" />
+              </div>
+              <div class="network-info">
+                <div class="network-name">Walrus</div>
+                <div class="network-symbol">WAL</div>
+              </div>
+            </div>
+            <div class="score-col">
+              <div class="progress-container">
+                <svg class="progress-circle" viewBox="0 0 64 64">
+                  <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+                  <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
+                </svg>
+                <div class="progress-text">
+                  <div id="value" style="color: #b0b0b0">N/A</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="zigzag-container">
-            <img src="media/zigzag-pattern.svg" alt="Zigzag Pattern" class="zigzag" />
-          </div>
-        </header>
 
-        <!-- Main leaderboard -->
-        <div class="leaderboard">
-          <!-- Table header -->
-          <div class="table-header">
-            <div class="ranking-col">Ranking</div>
-            <div class="network-col">Network</div>
-            <div class="score-col">Score</div>
-          </div>
-
-          <!-- Table rows -->
-          <div id="table-rows" class="table-rows">
-            <div class="table-row">
-              <div class="ranking-col">2.</div>
-              <div class="network-col">
-                <div class="network-logo">
-                  <img src="media/walrus.svg" alt="Walrus Logo" />
-                </div>
-                <div class="network-info">
-                  <div class="network-name">Walrus</div>
-                  <div class="network-symbol">WAL</div>
-                </div>
+          <div class="table-row">
+            <div class="ranking-col">3.</div>
+            <div class="network-col">
+              <div class="network-logo">
+                <img src="media/arweave.svg" alt="Arweave Logo" />
               </div>
-              <div class="score-col">
-                <div class="progress-container">
-                  <svg class="progress-circle" viewBox="0 0 64 64">
-                    <circle class="progress-background" cx="32" cy="32" r="28"></circle>
-                    <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
-                  </svg>
-                  <div class="progress-text">
-                    <div id="value" style="color: #b0b0b0">N/A</div>
-                  </div>
-                </div>
+              <div class="network-info">
+                <div class="network-name">Arweave</div>
+                <div class="network-symbol">ARW</div>
               </div>
             </div>
-
-            <div class="table-row">
-              <div class="ranking-col">3.</div>
-              <div class="network-col">
-                <div class="network-logo">
-                  <img src="media/arweave.svg" alt="Arweave Logo" />
-                </div>
-                <div class="network-info">
-                  <div class="network-name">Arweave</div>
-                  <div class="network-symbol">ARW</div>
-                </div>
-              </div>
-              <div class="score-col">
-                <div class="progress-container">
-                  <svg class="progress-circle" viewBox="0 0 64 64">
-                    <circle class="progress-background" cx="32" cy="32" r="28"></circle>
-                    <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
-                  </svg>
-                  <div class="progress-text">
-                    <div id="value" style="color: #b0b0b0">N/A</div>
-                  </div>
+            <div class="score-col">
+              <div class="progress-container">
+                <svg class="progress-circle" viewBox="0 0 64 64">
+                  <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+                  <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
+                </svg>
+                <div class="progress-text">
+                  <div id="value" style="color: #b0b0b0">N/A</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Bottom zigzag pattern -->
-      <div class="bottom-zigzag">
-        <img src="media/zigzag-pattern-bottom.svg" alt="Zigzag Pattern" class="zigzag" />
-      </div>
-    </main>
-
-    <script type="module" src="js/script.js"></script>
-  </body>
+    <!-- Bottom zigzag pattern -->
+    <div class="bottom-zigzag">
+      <img src="media/zigzag-pattern-bottom.svg" alt="Zigzag Pattern" class="zigzag" />
+    </div>
+  </main>
+  <script type="module" src="js/script.js"></script>
+</body>
 </html>

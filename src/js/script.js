@@ -134,18 +134,14 @@ export function createNetworkItemHTML (network, index) {
  * @returns {Promise<void>}
  */
 export async function updateLeaderboard () {
-  // /** @type {HTMLElement | null} */
-  // const loadingContainer = document.getElementById('loading-container')
-  // /** @type {HTMLElement | null} */
-  // const errorElement = document.getElementById('error-container')
+  /** @type {HTMLElement | null} */
+  const loadingContainer = document.getElementById('loading-container')
+  /** @type {HTMLElement | null} */
+  const errorElement = document.getElementById('error-container')
   /** @type {HTMLElement | null} */
   const networksElement = document.getElementById('table-rows')
 
-  // if (!loadingContainer || !errorElement || !networksElement) {
-  //   console.error('Required DOM elements not found')
-  //   return
-  // }
-  if (!networksElement) {
+  if (!loadingContainer || !errorElement || !networksElement) {
     console.error('Required DOM elements not found')
     return
   }
@@ -169,12 +165,12 @@ export async function updateLeaderboard () {
     // Prepend new data to the existing list
     networksElement.innerHTML = validData.map((network, index) => createNetworkItemHTML(network, index + 1)).join('') + networksElement.innerHTML
 
-    // loadingContainer.classList.add('hidden')
-    // errorElement.classList.add('hidden')
-    // networksElement.classList.remove('hidden')
+    loadingContainer.classList.add('hidden')
+    errorElement.classList.add('hidden')
+    networksElement.classList.remove('hidden')
   } catch (error) {
-    // loadingContainer.classList.add('hidden')
-    // errorElement.classList.remove('hidden')
+    loadingContainer.classList.add('hidden')
+    errorElement.classList.remove('hidden')
     networksElement.classList.add('hidden')
     console.error('Error updating leaderboard:', error)
   }
