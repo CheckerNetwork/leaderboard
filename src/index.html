@@ -18,6 +18,7 @@
       src="https://plausible.io/js/script.js"
     ></script>
   </head>
+
   <body>
     <main class="main-container">
       <div class="container">
@@ -56,9 +57,13 @@
                 </div>
               </div>
               <div class="score-col">
-                <div class="circular-progress" data-value="94" data-color="#4ff8ca">
-                  <div class="progress-value">
-                    <span class="value">N/A</span>
+                <div class="progress-container">
+                  <svg class="progress-circle" viewBox="0 0 64 64">
+                    <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+                    <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
+                  </svg>
+                  <div class="progress-text">
+                    <div id="value" style="color: #b0b0b0">N/A</div>
                   </div>
                 </div>
               </div>
@@ -76,9 +81,13 @@
                 </div>
               </div>
               <div class="score-col">
-                <div class="circular-progress" data-value="94" data-color="#4ff8ca">
-                  <div class="progress-value">
-                    <span class="value">NA</span>
+                <div class="progress-container">
+                  <svg class="progress-circle" viewBox="0 0 64 64">
+                    <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+                    <circle class="progress-indicator" cx="32" cy="32" r="28"></circle>
+                  </svg>
+                  <div class="progress-text">
+                    <div id="value" style="color: #b0b0b0">N/A</div>
                   </div>
                 </div>
               </div>

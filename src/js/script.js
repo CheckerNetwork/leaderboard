@@ -95,9 +95,11 @@ export async function fetchNetworkData (network, fetch = globalThis.fetch) {
  * @returns {string} HTML string for the network item
  */
 export function createNetworkItemHTML (network, index) {
+  /* Circumference of circle (2 * PI * r) where r = 28 */
   const color = '#4ff8ca'
-  const fillProgressValue = ((network.successRate / 100) * 360).toFixed(1)
-  const fillProgress = `conic-gradient(${color} 0deg ${fillProgressValue}deg, rgba(255, 255, 255, 0) ${fillProgressValue}deg 360deg)`
+  const r = 28
+  const circumference = 2 * Math.PI * r
+  const progress = circumference - (circumference * network.successRate) / 100
 
   return htmlEscape`
   <div class="table-row">
@@ -112,10 +114,14 @@ export function createNetworkItemHTML (network, index) {
       </div>
     </div>
     <div class="score-col">
-      <div class="circular-progress" data-value="${network.successRate.toFixed(1)}" style="background: ${fillProgress}">
-        <div class="progress-value">
-          <span class="value" style="color: ${color}">${network.successRate.toFixed(1)}</span>
-          <span class="max">/100</span>
+      <div class="progress-container">
+        <svg class="progress-circle" viewBox="0 0 64 64">
+          <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+          <circle class="progress-indicator" cx="32" cy="32" r="28" style="stroke-dashoffset: ${progress}; stroke: ${color}"></circle>
+        </svg>
+        <div class="progress-text">
+          <div id="value" style="color: ${color}">${network.successRate.toFixed(1)}</div>
+          <div class="max">/100</div>
         </div>
       </div>
     </div>
