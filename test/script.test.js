@@ -34,8 +34,12 @@ test('createNetworkItemHTML generates correct HTML', () => {
   assert.ok(html.includes('network-logo'))
   assert.ok(html.includes('network-name'))
   assert.ok(html.includes('network-symbol'))
-  assert.ok(html.includes('circular-progress'))
+  assert.ok(html.includes('score-col'))
+  assert.ok(html.includes('progress-container'))
+  assert.ok(html.includes('progress-circle'))
+  assert.ok(html.includes('progress-text'))
   assert.ok(html.includes('value'))
+  assert.ok(html.includes('max'))
 })
 
 test('createNetworkItemHTML handles zero success rate', () => {
