@@ -42,7 +42,7 @@ body {
     'ss07' on;
   backdrop-filter: blur(10px);
   background-image: url('media/gradient.jpeg');
-  background-size: auto;
+  background-size: contain;
   background-position: bottom right;
   background-repeat: no-repeat;
 }
