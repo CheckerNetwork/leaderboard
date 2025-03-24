@@ -120,7 +120,7 @@ export function createNetworkItemHTML (network, index) {
           <circle class="progress-indicator" cx="32" cy="32" r="28" style="stroke-dashoffset: ${progress}; stroke: ${color}"></circle>
         </svg>
         <div class="progress-text">
-          <div id="value" style="color: ${color}">${network.successRate.toFixed(1)}</div>
+          <div class="value" style="color: ${color}">${network.successRate.toFixed(1)}</div>
           <div class="max">/100</div>
         </div>
       </div>
