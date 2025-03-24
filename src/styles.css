@@ -135,6 +135,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
 }
 
 /* Table rows */
@@ -159,7 +162,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
+}
+
+.rank {
   font-size: 18px;
+  font-weight: 400;
   color: white;
 }
 
@@ -168,6 +178,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
 }
 
 .network-logo {
@@ -189,12 +202,14 @@ body {
 .network-name {
   font-size: 18px;
   color: white;
+  font-weight: 400;
   text-transform: capitalize;
 }
 
 .network-symbol {
   font-size: 12px;
   color: white;
+  font-weight: 300;
 }
 
 /* Circular progress */
