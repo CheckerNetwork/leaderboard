@@ -104,6 +104,7 @@ export function createNetworkItemHTML (network, index) {
   return htmlEscape`
   <div class="table-row">
     <div class="ranking-col rank">${index}.</div>
+    <div></div>
     <div class="network-col">
       <div class="network-logo">
         <img src="media/${network.name}.svg" alt="${network.name} Logo">
