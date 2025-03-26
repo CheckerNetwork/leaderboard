@@ -14,7 +14,7 @@ const TEST_NETWORK = {
 }
 
 test('NETWORKS array contains expected networks', () => {
-  assert.deepEqual(NETWORKS, [FILECOIN])
+  assert.deepEqual(NETWORKS, [FILECOIN, { name: 'arweave', symbol: 'ARW' }, { name: 'walrus', symbol: 'WAL' }])
 })
 
 test('createNetworkItemHTML generates correct HTML', () => {
@@ -40,6 +40,8 @@ test('createNetworkItemHTML generates correct HTML', () => {
   assert.ok(html.includes('progress-text'))
   assert.ok(html.includes('value'))
   assert.ok(html.includes('max'))
+  assert.ok(html.includes('stroke: #4FF8CA'))
+  assert.ok(html.includes('color: #4FF8CA'))
 })
 
 test('createNetworkItemHTML handles zero success rate', () => {
@@ -51,6 +53,21 @@ test('createNetworkItemHTML handles zero success rate', () => {
 
   const html = createNetworkItemHTML(testNetwork, 1)
   assert.ok(html.includes('0.0'))
+  assert.ok(html.includes('stroke: #ED158A'))
+  assert.ok(html.includes('color: #ED158A'))
+})
+
+test('createNetworkItemHTML handles 55% success rate', () => {
+  const testNetwork = {
+    name: 'test-network',
+    symbol: 'TST',
+    successRate: 55
+  }
+
+  const html = createNetworkItemHTML(testNetwork, 1)
+  assert.ok(html.includes('55.0'))
+  assert.ok(html.includes('stroke: #CAF659'))
+  assert.ok(html.includes('color: #CAF659'))
 })
 
 test('createNetworkItemHTML handles 100% success rate', () => {
@@ -62,6 +79,8 @@ test('createNetworkItemHTML handles 100% success rate', () => {
 
   const html = createNetworkItemHTML(testNetwork, 1)
   assert.ok(html.includes('100.0'))
+  assert.ok(html.includes('stroke: #4FF8CA'))
+  assert.ok(html.includes('color: #4FF8CA'))
 })
 
 test('getNetworkUrl returns correct URL for filecoin', () => {

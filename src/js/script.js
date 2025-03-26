@@ -29,7 +29,9 @@ import { htmlEscape } from 'escape-goat'
 /** @type {readonly Network[]} */
 // TODO: Add 'arweave' and 'walrus' to the NETWORKS array once we start collecting data for them
 export const NETWORKS = [
-  { name: 'filecoin', symbol: 'FIL' }
+  { name: 'filecoin', symbol: 'FIL' },
+  { name: 'arweave', symbol: 'ARW' },
+  { name: 'walrus', symbol: 'WAL' }
 ]
 
 /** @type {string} */
@@ -89,6 +91,22 @@ export async function fetchNetworkData (network, fetch = globalThis.fetch) {
 }
 
 /**
+ * Returns a color based on the success rate
+ *
+ * @param {number} successRate
+ * @returns {string}
+ */
+const getSuccessRateColor = (successRate) => {
+  if (successRate < 50) {
+    return '#ED158A'
+  } else if (successRate < 75) {
+    return '#CAF659'
+  } else {
+    return '#4FF8CA'
+  }
+}
+
+/**
  * Creates an HTML element for a network item
  * @param {NetworkData} network - The network data to create an element for
  * @param {number} index - The index of the network in the leaderboard
@@ -96,10 +114,10 @@ export async function fetchNetworkData (network, fetch = globalThis.fetch) {
  */
 export function createNetworkItemHTML (network, index) {
   /* Circumference of circle (2 * PI * r) where r = 28 */
-  const color = '#4ff8ca'
   const r = 28
   const circumference = 2 * Math.PI * r
   const progress = circumference - (circumference * network.successRate) / 100
+  const color = getSuccessRateColor(network.successRate)
 
   return htmlEscape`
   <div class="table-row">
@@ -118,7 +136,7 @@ export function createNetworkItemHTML (network, index) {
       <div class="progress-container">
         <svg class="progress-circle" viewBox="0 0 64 64">
           <circle class="progress-background" cx="32" cy="32" r="28"></circle>
-          <circle class="progress-indicator" cx="32" cy="32" r="28" style="stroke-dashoffset: ${progress}; stroke: ${color}"></circle>
+          <circle class="progress-indicator" cx="32" cy="32" r="28" style="stroke-dashoffset: ${progress}; stroke: ${color};"></circle>
         </svg>
         <div class="progress-text">
           <div class="value" style="color: ${color}">${network.successRate.toFixed(1)}</div>
@@ -162,6 +180,7 @@ export async function updateLeaderboard () {
 
     // Sort by success rate descending
     validData.sort((a, b) => b.successRate - a.successRate)
+    console.log(validData)
 
     // Prepend new data to the existing list
     networksElement.innerHTML = validData.map((network, index) => createNetworkItemHTML(network, index + 1)).join('') + networksElement.innerHTML
