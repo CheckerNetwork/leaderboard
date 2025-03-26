@@ -345,6 +345,49 @@ body {
   display: none;
 }
 
+/* Q&A container */
+.qa-container {
+  background: rgba(58, 58, 58, 0.22);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(107, 107, 107, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 2rem 4rem;
+}
+
+/* Individual Q&A item */
+.qa-item {
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  border-bottom: 0.5px solid rgba(174, 174, 174, 0.3);
+}
+
+.qa-item:last-child {
+  border-bottom: none;
+}
+
+/* Question styling */
+.question {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0.7rem;
+}
+
+/* Answer styling */
+.answer {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0.7rem;
+  line-height: 1.5rem;
+}
+
+.link {
+  color: #4ff8ca;
+}
+
+.link:visited {
+  color: #caf659;
+}
+
 /* Responsive styles */
 @media (max-width: 1200px) {
   .zigzag {
@@ -437,7 +480,8 @@ body {
     height: 50px;
   }
 
-  .leaderboard {
+  .leaderboard,
+  .qa-container {
     padding: 0.5rem 1rem;
   }
 
