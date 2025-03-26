@@ -382,6 +382,7 @@ body {
 
 .link {
   color: #4ff8ca;
+  text-decoration: none;
 }
 
 .link:visited {
