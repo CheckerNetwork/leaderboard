@@ -236,7 +236,7 @@ body {
 .progress-indicator {
   fill: none;
   stroke: rgba(7, 7, 7, 0.3);
-  stroke-width: 8px;
+  stroke-width: 6px;
   stroke-linecap: round;
   stroke-dasharray: 175.9;
 }
