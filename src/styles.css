@@ -362,6 +362,7 @@ body {
   font-size: 18px;
   font-weight: 500;
   padding: 0.7rem;
+  letter-spacing: 0.1rem;
 }
 
 /* Answer styling */
@@ -370,6 +371,7 @@ body {
   font-weight: 300;
   padding: 0.7rem;
   line-height: 1.5rem;
+  letter-spacing: 0.1rem;
 }
 
 .link {
