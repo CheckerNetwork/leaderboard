@@ -81,28 +81,29 @@
             <div class="question">How are networks ranked?</div>
             <div class="answer">
               <p>
-                Networks are ranked based on their retrieval score—the higher the score, the higher
+                Networks are ranked based on their retrieval score: the higher the score, the higher
                 the position on the leaderboard.
               </p>
             </div>
           </div>
 
           <div class="qa-item">
-            <div class="question">How is retrieval score determined for Filecoin?</div>
+            <div class="question">How is the retrieval score determined for Filecoin?</div>
             <div class="answer">
               <p>
-                Filecoin retrieval score represents average of all Storage Provider (SP) retrieval
-                scores (RSR) over 24-hour period. Storage Provider RSR is calculated by dividing the
-                number of successful retrievals by the total valid retrieval requests for that
-                provider within a given timeframe. Only requests that pass fraud detection are
-                included in the calculation. For more detail please refer to
+                The Filecoin retrieval score represents the average of all Storage Provider (SP)
+                retrieval success rate (RSR) scores over a 24-hour period. Storage Provider RSR is
+                calculated by dividing the number of successful retrievals by the total number of
+                valid retrieval requests for that provider within a given timeframe. Only requests
+                that pass fraud detection are included in the calculation. For more detail please
+                refer to
                 <a href="https://docs.filspark.com/" class="link">Spark protocol docs</a>.
               </p>
             </div>
           </div>
 
           <div class="qa-item">
-            <div class="question">How is retrieval score determined for Arweave?</div>
+            <div class="question">How is the retrieval score determined for Arweave?</div>
             <div class="answer">
               <p>
                 The retrieval score for Arweave is determined by the percentage of successful
@@ -117,9 +118,8 @@
             </div>
           </div>
 
-          <!-- Q&A Item 2 -->
           <div class="qa-item">
-            <div class="question">How is retrieval score determined for Walrus?</div>
+            <div class="question">How is the retrieval score determined for Walrus?</div>
             <div class="answer">
               <p>
                 The retrieval score for Walrus is calculated based on the percentage of successful
@@ -129,11 +129,10 @@
                   class="link"
                   href="https://docs.walrus.site/usage/web-api.html?public-aggregators=undefined#public-aggregators"
                   >aggregator nodes</a
-                >
-                and result of a retrieval check is reported back to the API (without fraud
-                checking). Note that this approach currently results in a higher retrieval score, as
-                it does not involve decentralized node retrievals (unlinke Filecoin and Arweave).
-                For more details, refer to
+                >. The result of a retrieval check is reported back to the API (without fraud
+                checking). Note that this approach may result in a higher retrieval score than
+                Filecoin and Arweave as it is fetching the data from an aggregator rather than from
+                the storage nodes. For more details, refer to
                 <a href="https://github.com/CheckerNetwork/walrus-checker" class="link"
                   >the Walrus Checker repository</a
                 >.
