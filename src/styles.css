@@ -1,6 +1,6 @@
 /* Base styles */
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=switzer@300,400&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@300&display=swap');
 
 * {
   margin: 0;
@@ -361,7 +361,7 @@ body {
 /* Question styling */
 .question {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0.7rem;
   font-size: 1.5rem;
   line-height: 117%;
@@ -370,8 +370,9 @@ body {
 /* Answer styling */
 .answer {
   font-family: 'Switzer', sans-serif;
+  color: #ccc;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
   padding: 0.7rem;
   line-height: 167%;
   letter-spacing: 1%;
