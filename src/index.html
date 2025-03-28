@@ -67,6 +67,26 @@
           <!-- Table rows -->
           <div id="table-rows" class="table-rows"></div>
         </div>
+
+        <div class="disclaimer">
+          <div class="disclaimer-title">Caveats:</div>
+          <div class="disclaimer-text">
+            1. Filecoin retrievals are made across all FIL+ deals, not just those from Filecoin
+            datacap allocators that demand retrievability. We will soon have the fidelity to remove
+            certain allocator deals from the calculation which will likely improve the Filecoin
+            score.
+          </div>
+          <div class="disclaimer-text">
+            2. Walrus retrieval requests are currently made to the aggregator nodes, not to the root
+            storage nodes. A better comparison here to Filecoin and Arweave would be to test the
+            retrieval success rate of fetching the erasure encoding blobs on Walrus nodes. However
+            we were unable to manage this with our current access to the Walrus Network.
+          </div>
+          <div class="disclaimer-text">
+            3. As this leaderboard develops, we would like to make a distinction between L1 storage
+            nodes and L2 nodes, such as aggregators, gateways, CDNs.
+          </div>
+        </div>
       </div>
 
       <!-- Bottom zigzag pattern -->
@@ -109,8 +129,7 @@
                 The retrieval score for Arweave is determined by the percentage of successful
                 retrievals over a 24-hour period. Retrievals are conducted by selecting a random
                 Arweave transaction and performing a retrieval from a random Arweave node, and the
-                results are reported back to the API. For more details,
-                refer to
+                results are reported back to the API. For more details, refer to
                 <a href="https://github.com/CheckerNetwork/arweave-checker" class="link"
                   >the Arweave Checker repository</a
                 >.
@@ -129,10 +148,10 @@
                   class="link"
                   href="https://docs.walrus.site/usage/web-api.html?public-aggregators=undefined#public-aggregators"
                   >aggregator nodes</a
-                >. The result of a retrieval check is reported back to the API. Note that
-                this approach may result in a higher retrieval score than
-                Filecoin and Arweave as it is fetching the data from an aggregator rather than from
-                the storage nodes. For more details, refer to
+                >. The result of a retrieval check is reported back to the API. Note that this
+                approach may result in a higher retrieval score than Filecoin and Arweave as it is
+                fetching the data from an aggregator rather than from the storage nodes. For more
+                details, refer to
                 <a href="https://github.com/CheckerNetwork/walrus-checker" class="link"
                   >the Walrus Checker repository</a
                 >.
