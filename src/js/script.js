@@ -27,10 +27,9 @@ import { htmlEscape } from 'escape-goat'
  */
 
 /** @type {readonly Network[]} */
-// TODO: Add 'arweave' and 'walrus' to the NETWORKS array once we start collecting data for them
 export const NETWORKS = [
   { name: 'filecoin', symbol: 'FIL' },
-  { name: 'arweave', symbol: 'ARW' },
+  { name: 'arweave', symbol: 'AR' },
   { name: 'walrus', symbol: 'WAL' }
 ]
 
