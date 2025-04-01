@@ -14,7 +14,7 @@ const TEST_NETWORK = {
 }
 
 test('NETWORKS array contains expected networks', () => {
-  assert.deepEqual(NETWORKS, [FILECOIN, { name: 'arweave', symbol: 'ARW' }, { name: 'walrus', symbol: 'WAL' }])
+  assert.deepEqual(NETWORKS, [FILECOIN, { name: 'arweave', symbol: 'AR' }, { name: 'walrus', symbol: 'WAL' }])
 })
 
 test('createNetworkItemHTML generates correct HTML', () => {
