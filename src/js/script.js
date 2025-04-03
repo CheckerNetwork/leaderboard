@@ -38,6 +38,28 @@ export const API_BASE_URL = 'https://api.checker.network'
 export const SPARK_API_BASE_URL = 'https://stats.filspark.com'
 
 /**
+ * Converts a given Date object to a local date string in ISO format (YYYY-MM-DD).
+ *
+ * @param {Date} d - The Date object to be converted.
+ * @returns {string} The local date as a string in ISO format.
+ */
+const getLocalDayAsISOString = (d) => {
+  return [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, '0'),
+    String(d.getDate()).padStart(2, '0')
+  ].join('-')
+}
+
+/**
+ * Calculates a date string in ISO format for a given number of days ago.
+ *
+ * @param {number} daysAgo - The number of days ago from the current date.
+ * @returns {string} The ISO string representation of the calculated date.
+ */
+export const getDateDaysAgo = (daysAgo) => getLocalDayAsISOString(new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000))
+
+/**
  * @param {Network} network
  * @returns {string}
  */
@@ -50,17 +72,24 @@ export function getNetworkUrl ({ name: networkName }) {
 }
 
 /**
- * Calculates success rate from total and successful measurements
- * @param {string} total - Total number of measurements
- * @param {string} successful - Number of successful measurements
- * @returns {number} Success rate as percentage (0-100)
+ * Calculates success rate from list of total and successful measurements.
+ *
+ * @param {{total: string; successful: string}[]} data - Array containing list of objects with total and successful measurements
+ * @returns {number} Success rate as percentage in 0 to 100 range.
  */
-function calculateSuccessRate (total, successful) {
-  const totalNum = parseInt(total, 10)
-  const successfulNum = parseInt(successful, 10)
+function calculateSuccessRate (data) {
+  let totalMeasurementsCount = 0
+  let successfulMeasurementsCount = 0
 
-  if (totalNum === 0) return 0
-  return (successfulNum / totalNum) * 100
+  for (const { total, successful } of data) {
+    const totalNum = parseInt(total, 10)
+    const successfulNum = parseInt(successful, 10)
+    totalMeasurementsCount += totalNum
+    successfulMeasurementsCount += successfulNum
+  }
+
+  if (totalMeasurementsCount === 0) return 0
+  return (successfulMeasurementsCount / totalMeasurementsCount) * 100
 }
 
 /**
@@ -71,8 +100,11 @@ function calculateSuccessRate (total, successful) {
  */
 export async function fetchNetworkData (network, fetch = globalThis.fetch) {
   try {
+    const from = getDateDaysAgo(7)
+    const to = getDateDaysAgo(1)
+
     const networkUrl = getNetworkUrl(network)
-    const response = await fetch(`${networkUrl}/retrieval-success-rate`)
+    const response = await fetch(`${networkUrl}/retrieval-success-rate?from=${from}&to=${to}`)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -81,7 +113,7 @@ export async function fetchNetworkData (network, fetch = globalThis.fetch) {
     const data = await response.json()
     return {
       ...network,
-      successRate: data.length > 0 ? calculateSuccessRate(data[0].total, data[0].successful) : 0
+      successRate: data.length > 0 ? calculateSuccessRate(data) : 0
     }
   } catch (error) {
     console.error(`Error fetching ${network} data:`, error)
