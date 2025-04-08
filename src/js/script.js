@@ -74,18 +74,16 @@ export function getNetworkUrl ({ name: networkName }) {
 /**
  * Calculates success rate from list of total and successful measurements.
  *
- * @param {{total: string; successful: string}[]} data - Array containing list of objects with total and successful measurements
+ * @param {{total: string; successful: string}[]} dailyMeasurements - Array containing list of objects with total and successful measurements
  * @returns {number} Success rate as percentage in 0 to 100 range.
  */
-function calculateSuccessRate (data) {
+function calculateSuccessRate (dailyMeasurements) {
   let totalMeasurementsCount = 0
   let successfulMeasurementsCount = 0
 
-  for (const { total, successful } of data) {
-    const totalNum = parseInt(total, 10)
-    const successfulNum = parseInt(successful, 10)
-    totalMeasurementsCount += totalNum
-    successfulMeasurementsCount += successfulNum
+  for (const { total, successful } of dailyMeasurements) {
+    totalMeasurementsCount += parseInt(total, 10)
+    successfulMeasurementsCount  += parseInt(successful, 10)
   }
 
   if (totalMeasurementsCount === 0) return 0
@@ -110,10 +108,10 @@ export async function fetchNetworkData (network, fetch = globalThis.fetch) {
     }
 
     /** @type {NetworkDailyMeasurments[]} */
-    const data = await response.json()
+    const dailyMeasurements = await response.json()
     return {
       ...network,
-      successRate: data.length > 0 ? calculateSuccessRate(data) : 0
+      successRate: dailyMeasurements.length > 0 ? calculateSuccessRate(dailyMeasurements) : 0
     }
   } catch (error) {
     console.error(`Error fetching ${network} data:`, error)
