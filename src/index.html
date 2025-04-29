@@ -65,9 +65,46 @@
           </div>
 
           <!-- Table rows -->
-          <div id="table-rows" class="table-rows"></div>
+          <div id="table-rows" class="table-rows">
+            <div class="table-row">
+              <div class="ranking-col rank">3</div>
+              <div></div>
+              <div class="network-col">
+                <div class="network-logo">
+                  <img src="media/filecoin.svg" alt="Filecoin Logo" />
+                </div>
+                <div class="network-info">
+                  <div class="network-name-with-warning">
+                    Filecoin ⚠️
+                    <span class="tooltip"
+                      >Notice: We're currently experiencing issues measuring Filecoin retrievability
+                      due to an ongoing outage with the Interplanetary Network Indexer (IPNI). We
+                      appreciate your patience as we work to resolve this.</span
+                    >
+                  </div>
+                  <div class="network-symbol">FIL</div>
+                </div>
+              </div>
+              <div class="score-col">
+                <div class="progress-container">
+                  <svg class="progress-circle" viewBox="0 0 64 64">
+                    <circle class="progress-background" cx="32" cy="32" r="28"></circle>
+                    <circle
+                      class="progress-indicator"
+                      cx="32"
+                      cy="32"
+                      r="28"
+                      style="stroke-dashoffset: 0"
+                    ></circle>
+                  </svg>
+                  <div class="progress-text">
+                    <div class="value" style="color: gray">N/A</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
         <div class="disclaimer">
           <div class="disclaimer-title">Caveats:</div>
           <div class="disclaimer-text">

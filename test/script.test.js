@@ -17,7 +17,8 @@ const from = getDateDaysAgo(7)
 const to = getDateDaysAgo(1)
 
 test('NETWORKS array contains expected networks', () => {
-  assert.deepEqual(NETWORKS, [FILECOIN, { name: 'arweave', symbol: 'AR' }, { name: 'walrus', symbol: 'WAL' }])
+  // TODO: Enable filecoin
+  assert.deepEqual(NETWORKS, [{ name: 'arweave', symbol: 'AR' }, { name: 'walrus', symbol: 'WAL' }])
 })
 
 test('createNetworkItemHTML generates correct HTML', () => {

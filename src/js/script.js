@@ -28,7 +28,8 @@ import { htmlEscape } from 'escape-goat'
 
 /** @type {readonly Network[]} */
 export const NETWORKS = [
-  { name: 'filecoin', symbol: 'FIL' },
+  // TODO: Enable filecoin
+  // { name: 'filecoin', symbol: 'FIL' },
   { name: 'arweave', symbol: 'AR' },
   { name: 'walrus', symbol: 'WAL' }
 ]
@@ -83,7 +84,7 @@ function calculateSuccessRate (dailyMeasurements) {
 
   for (const { total, successful } of dailyMeasurements) {
     totalMeasurementsCount += parseInt(total, 10)
-    successfulMeasurementsCount  += parseInt(successful, 10)
+    successfulMeasurementsCount += parseInt(successful, 10)
   }
 
   if (totalMeasurementsCount === 0) return 0
