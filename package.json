@@ -23,7 +23,7 @@
     "homepage": "https://github.com/CheckerNetwork/leaderboard#readme",
     "devDependencies": {
         "@types/escape-goat": "^2.0.3",
-        "@types/node": "^22.15.12",
+        "@types/node": "^22.15.14",
         "escape-goat": "^4.0.0",
         "prettier": "^3.5.3",
         "standard": "^17.1.2",
